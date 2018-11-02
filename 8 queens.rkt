@@ -1,5 +1,3 @@
-(define-struct state (queen h))
-
 (define (start)
   (define L (list (random 8) (random 8) (random 8) (random 8) (random 8) (random 8) (random 8) (random 8)))
   (printBoard L)
@@ -53,3 +51,35 @@
     ((= (list-ref queensL queenNum) (+ (list-ref queensL index) (abs (- index queenNum)))) (add1 (countDiaAttacks queensL queenNum (add1 index))))
     ((= (list-ref queensL queenNum) (- (list-ref queensL index) (abs (- index queenNum)))) (add1 (countDiaAttacks queensL queenNum (add1 index))))
     (else (countDiaAttacks queensL queenNum (add1 index)))))
+
+(define (makeAllMove state index)
+  (cond
+    ((= (length (state-queen state)) index) '())
+    (else (append (move (state index) (makeAllMove state (add1 index)))))))
+
+(define (move queensL index moveCounter)
+  (cond
+    ((= index (length queensL)) '())
+    ((= (list-ref queensL index) moveCounter) (move queensL index (add1 moveCounter)))
+    (else ())))
+
+(define (listUntill L index counter)
+  (cond
+    ((= index 0) '())
+    ((= (sub1 (length L)) index) L)
+    ((= counter index) '())
+    (else (cons (list-ref L counter) (listUntill L index (add1 counter))))))
+
+(define (listFrom L index)
+  (cond 
+    ((= index 0) L)
+    ((= (length L) index) '())
+    (else (cons (list-ref L index) (listFrom L (add1 index))))))
+
+(define (findBestMove state) ;WIP
+  ('blank))
+
+(define (solve state)
+  (cond
+    ((= 0 0) 0)
+    (else 1)))
