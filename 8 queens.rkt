@@ -63,7 +63,7 @@
   (cond
     ((= index (length queensL)) (sameAttack? (list-ref queensL (randomIndexFrom indexBest)) lastAttackCount sameAttacksCounter))
     ((= (countAttacks (list-ref queensL index) 0) lowestAtacks) (findBestMove queensL lowestAtacks (cons index indexBest) (add1 index) lastAttackCount sameAttacksCounter))
-    ((< (countAttacks (list-ref queensL index) 0) lowestAtacks) (findBestMove queensL lowestAtacks (list index) (add1 index) lastAttackCount sameAttacksCounter))
+    ((< (countAttacks (list-ref queensL index) 0) lowestAtacks) (findBestMove queensL (countAttacks (list-ref queensL index) 0) (list index) (add1 index) lastAttackCount sameAttacksCounter))
     (else (findBestMove queensL lowestAtacks indexBest (add1 index) lastAttackCount sameAttacksCounter))))
 
 (define (randomIndexFrom L)
@@ -76,6 +76,16 @@
 
 (define (solve queensL lastAttackCount sameAttacksCounter)
   (cond
-    ((= sameAttacksCounter 5) (print 'failed!) (print queensL))
-    ((= (countAttacks queensL 0) 0) (print 'solved) (print queensL))
+    ((= sameAttacksCounter 6) (println 'failed!) (println queensL) (println lastAttackCount) (newline))
+    ((= (countAttacks queensL 0) 0) (println 'solved) (println queensL) (newline))
     (else (findBestMove (move queensL 0 1) (add1 lastAttackCount) 0 0 lastAttackCount sameAttacksCounter))))
+
+(define (calcForEach queensL index)
+  (cond
+    ((= index (length queensL)) '())
+    (else (cons (countAttacks (list-ref queensL index) 0) (calcForEach queensL (add1 index))))))
+
+(define (run times)
+  (cond
+    ((= times 0) 'done)
+    (else (start) (run (sub1 times)))))
