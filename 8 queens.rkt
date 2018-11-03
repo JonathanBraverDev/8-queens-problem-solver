@@ -2,6 +2,7 @@
   (calcWCS (genarateRandomBoard 8 0))) ;Worst Case Scenario ;)
 
 (define (calcWCS queensL)
+  (println queensL)
   (solve queensL (- (* (length queensL) (length queensL)) (length queensL)) 0))
 
 (define (genarateRandomBoard boardSize index)
