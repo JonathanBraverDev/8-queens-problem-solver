@@ -57,11 +57,11 @@
     ((= (length (state-queen state)) index) '())
     (else (append (move (state index) (makeAllMove state (add1 index)))))))
 
-(define (move queensL index moveCounter)
+(define (move queensL index moveCounter) ;index=0,moveCounret=1
   (cond
     ((= index (length queensL)) '())
     ((= (list-ref queensL index) moveCounter) (move queensL index (add1 moveCounter)))
-    (else ())))
+    (else (append (reverse (cons moveCounter (reverse (listUntill queensL index 0)))) (listFrom queensL (add1 index))))))
 
 (define (listUntill L index counter)
   (cond
