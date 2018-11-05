@@ -42,7 +42,7 @@
 (define (move queensL index moveCounter) ;index=0,moveCounret=1
   (cond
     ((= index (length queensL)) '())
-    ((= moveCounter (add1 (length queensL))) (move queensL (add1 index) 0)) ;for 'human' numbers (1-8 insted of 0-7)
+    ((= moveCounter (add1 (length queensL))) (move queensL (add1 index) 1)) ;for 'human' numbers (1-8 insted of 0-7)
     ((= (list-ref queensL index) moveCounter) (move queensL index (add1 moveCounter)))
     (else (cons (append (reverse (cons moveCounter (reverse (listUntill queensL index 0)))) (listFrom queensL (add1 index))) (move queensL index (add1 moveCounter))))))
 
