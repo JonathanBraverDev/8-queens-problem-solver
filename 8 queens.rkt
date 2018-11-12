@@ -28,9 +28,6 @@
     ((= (list-ref queensL queenNum) (list-ref queensL index)) (add1 (rowAttacks queensL queenNum (add1 index))))
     (else (rowAttacks queensL queenNum (add1 index)))))
 
-(define (diaAttacks queensL queenNum)
-  (+ (countDiaAttacks queensL queenNum 0 0) (countDiaAttacks queensL queenNum)))
-
 (define (countDiaAttacks queensL queenNum index)
   (cond
     ((= index (length queensL)) 0)
